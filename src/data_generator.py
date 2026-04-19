@@ -5,9 +5,6 @@ from datetime import datetime, timedelta
 
 np.random.seed(42)
 
-# -----------------------------
-# CONFIGURATION
-# -----------------------------
 NUM_RESPONDENTS = 1000
 
 age_groups = ["18-25", "26-35", "36-50", "50+"]
@@ -24,9 +21,6 @@ questions = {
 options_q1 = ["Product A", "Product B", "Product C"]
 options_q2 = ["Price", "Quality", "Brand"]
 
-# -----------------------------
-# BIAS FUNCTIONS (REAL WORLD LOGIC)
-# -----------------------------
 
 def choose_option(age, region, question_id):
     if question_id == "Q1":
@@ -49,18 +43,11 @@ def choose_option(age, region, question_id):
         else:
             return np.random.choice(options_q2, p=[0.4, 0.3, 0.3])
 
-# -----------------------------
-# DATE GENERATION
-# -----------------------------
-
 def random_date():
     start = datetime(2025, 1, 1)
     end = datetime(2025, 4, 1)
     return start + timedelta(days=random.randint(0, (end - start).days))
 
-# -----------------------------
-# DATA GENERATION
-# -----------------------------
 
 data = []
 
@@ -87,15 +74,9 @@ for i in range(1, NUM_RESPONDENTS + 1):
             "timestamp": random_date()
         })
 
-# -----------------------------
-# CREATE DATAFRAME
-# -----------------------------
 
 df = pd.DataFrame(data)
 
-# -----------------------------
-# SAVE CSV
-# -----------------------------
 
 df.to_csv("data/poll_data.csv", index=False)
 
