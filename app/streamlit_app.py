@@ -2,25 +2,13 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# -----------------------------
-# CONFIG
-# -----------------------------
-
 st.set_page_config(
     page_title="Advanced Poll Analytics Dashboard",
     layout="wide"
 )
 
-# -----------------------------
-# LOAD DATA
-# -----------------------------
-
 df = pd.read_csv("data/poll_data.csv")
 df["timestamp"] = pd.to_datetime(df["timestamp"])
-
-# -----------------------------
-# SIDEBAR FILTERS
-# -----------------------------
 
 st.sidebar.title("Control Panel")
 
@@ -46,19 +34,11 @@ filtered_df = df[
     (df["age_group"].isin(age_filter))
 ]
 
-# -----------------------------
-# TITLE
-# -----------------------------
-
 st.title("Advanced Poll Analytics System")
 
 st.markdown("Real-time simulation of survey intelligence system")
 
 st.markdown("---")
-
-# -----------------------------
-# KPI CARDS (UPGRADED STYLE)
-# -----------------------------
 
 vote_counts = filtered_df["option_selected"].value_counts()
 top_option = vote_counts.idxmax()
@@ -72,10 +52,6 @@ col3.metric("Options Count", filtered_df["option_selected"].nunique())
 col4.metric("Regions", filtered_df["region"].nunique())
 
 st.markdown("---")
-
-# -----------------------------
-# ANALYTICS LAYER (NEW UPGRADE)
-# -----------------------------
 
 lead_margin = vote_counts.max() - vote_counts.min()
 dominance_score = (vote_counts.max() / total) * 100
@@ -148,16 +124,9 @@ with col2:
 
 st.markdown("---")
 
-# -----------------------------
-# CHART DATA
-# -----------------------------
-
 region_data = filtered_df.groupby(["region", "option_selected"]).size().reset_index(name="count")
 age_data = filtered_df.groupby(["age_group", "option_selected"]).size().reset_index(name="count")
 
-# -----------------------------
-# VISUALIZATION GRID (UPGRADED UI)
-# -----------------------------
 
 st.subheader("Poll Visualization Dashboard")
 
@@ -206,10 +175,6 @@ with col4:
         height=350
     )
     st.plotly_chart(fig4, use_container_width=True)
-
-# -----------------------------
-# INSIGHTS ENGINE (UPGRADED)
-# -----------------------------
 
 st.markdown("---")
 
