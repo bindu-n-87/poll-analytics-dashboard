@@ -1,0 +1,36 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Streamlit cache
+.streamlit/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Output folders (optional but recommended)
+outputs/
+*.png
+*.jpg
+*.jpeg
+
+# Large datasets (optional if you don’t want to push data)
+data/poll_data.csv
+
+# IDE files
+.vscode/
+.idea/
