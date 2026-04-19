@@ -3,31 +3,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-# -----------------------------
-# LOAD DATA
-# -----------------------------
-
 df = pd.read_csv("data/poll_data.csv")
-
-# -----------------------------
-# CREATE OUTPUT DIRECTORY
-# -----------------------------
 
 output_dir = "outputs/charts"
 os.makedirs(output_dir, exist_ok=True)
-
-# -----------------------------
-# REUSABLE SAVE FUNCTION
-# -----------------------------
 
 def save_plot(filename):
     path = os.path.join(output_dir, filename)
     plt.savefig(path, bbox_inches="tight")
     print(f"Saved: {path}")
-
-# -----------------------------
-# 1. VOTE DISTRIBUTION (BAR CHART)
-# -----------------------------
 
 plt.figure(figsize=(6, 4))
 
@@ -42,10 +26,6 @@ plt.ylabel("Votes")
 save_plot("vote_bar_chart.png")
 plt.show()
 
-# -----------------------------
-# 2. PIE CHART (DISTRIBUTION)
-# -----------------------------
-
 plt.figure(figsize=(6, 6))
 
 plt.pie(
@@ -59,10 +39,6 @@ plt.title("Poll Distribution")
 save_plot("vote_pie_chart.png")
 plt.show()
 
-# -----------------------------
-# 3. REGION-WISE ANALYSIS (STACKED BAR)
-# -----------------------------
-
 region_data = pd.crosstab(df["region"], df["option_selected"])
 
 region_data.plot(kind="bar", stacked=True, figsize=(8, 5))
@@ -74,10 +50,6 @@ plt.ylabel("Votes")
 save_plot("region_stacked_chart.png")
 plt.show()
 
-# -----------------------------
-# 4. AGE GROUP ANALYSIS
-# -----------------------------
-
 plt.figure(figsize=(7, 4))
 
 age_data = pd.crosstab(df["age_group"], df["option_selected"])
@@ -88,10 +60,6 @@ plt.title("Age Group vs Voting Preference")
 
 save_plot("age_group_chart.png")
 plt.show()
-
-# -----------------------------
-# 5. TIME TREND (OPTIONAL INSIGHT)
-# -----------------------------
 
 df["timestamp"] = pd.to_datetime(df["timestamp"])
 df["date"] = df["timestamp"].dt.date
