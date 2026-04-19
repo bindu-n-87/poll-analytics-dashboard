@@ -1,14 +1,6 @@
 import pandas as pd
 
-# -----------------------------
-# LOAD DATA
-# -----------------------------
-
 df = pd.read_csv("data/poll_data.csv")
-
-# -----------------------------
-# BASIC ANALYSIS
-# -----------------------------
 
 vote_counts = df["option_selected"].value_counts()
 vote_percent = df["option_selected"].value_counts(normalize=True) * 100
@@ -18,10 +10,6 @@ top_option = vote_counts.idxmax()
 region_pref = df.groupby(["region", "option_selected"]).size().unstack()
 
 age_pref = df.groupby(["age_group", "option_selected"]).size().unstack()
-
-# -----------------------------
-# INSIGHT GENERATION
-# -----------------------------
 
 print("\n==============================")
 print("POLL RESULTS ANALYSIS REPORT")
